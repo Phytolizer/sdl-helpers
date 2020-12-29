@@ -177,4 +177,6 @@ pub enum SdlError {
     CreateTexture(#[from] TextureValueError),
     #[error("Writing directly to texture data failed: {0}")]
     LockTexture(String),
+    #[error("Rendering text failed: {0}")]
+    Font(#[from] FontError),
 }

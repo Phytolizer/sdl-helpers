@@ -1,6 +1,6 @@
 [package]
 name = "sdl-helpers"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["kyle.coffey <kyle.coffey@tamu.edu>"]
 edition = "2018"
 
@@ -14,4 +14,4 @@ nalgebra = "0.23"
 
 [dependencies.sdl2]
 version = "0.34"
-features = ["gfx"]
+features = ["gfx", "ttf"]
