@@ -8,6 +8,7 @@ use sdl2::render::BlendMode;
 use sdl2::render::Canvas;
 use sdl2::render::RenderTarget;
 use sdl2::render::TextureValueError;
+use sdl2::ttf::FontError;
 use sdl2::video::WindowBuildError;
 use sdl2::IntegerOrSdlError;
 
@@ -40,10 +41,7 @@ pub trait EventExt {
 
 impl EventExt for Event {
     fn is_quit(&self) -> bool {
-        match self {
-            Event::Quit { .. } => true,
-            _ => false,
-        }
+        matches!(self, Event::Quit { .. })
     }
 }
 
@@ -90,7 +88,7 @@ impl<RT: RenderTarget> CanvasExt for Canvas<RT> {
     }
 
     fn push_matrix(&mut self) {
-        let top = MATRIX_STACK.read().last().unwrap().clone();
+        let top = *MATRIX_STACK.read().last().unwrap();
         MATRIX_STACK.write().push(top);
     }
 
