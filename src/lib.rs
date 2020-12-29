@@ -8,6 +8,7 @@ use sdl2::render::BlendMode;
 use sdl2::render::Canvas;
 use sdl2::render::RenderTarget;
 use sdl2::render::TextureValueError;
+use sdl2::ttf;
 use sdl2::ttf::FontError;
 use sdl2::video::WindowBuildError;
 use sdl2::IntegerOrSdlError;
@@ -157,6 +158,8 @@ pub fn init_sdl(
 pub enum SdlError {
     #[error("SDL initialization failed: {0}")]
     Init(String),
+    #[error("SDL_ttf initialization failed: {0}")]
+    InitTtf(#[from] ttf::InitError),
     #[error("SDL video subsystem initialization failed: {0}")]
     InitVideo(String),
     #[error("SDL_image initialization failed: {0}")]
@@ -177,4 +180,6 @@ pub enum SdlError {
     LockTexture(String),
     #[error("Rendering text failed: {0}")]
     Font(#[from] FontError),
+    #[error("Loading font file failed: {0}")]
+    LoadFont(String),
 }
